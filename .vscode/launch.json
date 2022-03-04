@@ -1,17 +1,17 @@
 {
   "configurations": [
     {
+      "name": "Python: Current File",
+      "type": "python",
+      "request": "launch",
+      "program": "startscrapy.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
       "name": "Launch via NPM",
       "request": "launch",
       "runtimeArgs": ["run-script", "start"],
-      "runtimeExecutable": "npm",
-      "skipFiles": ["<node_internals>/**"],
-      "type": "pwa-node"
-    },
-    {
-      "name": "scrapy",
-      "request": "launch",
-      "runtimeArgs": ["run", "scrapy"],
       "runtimeExecutable": "npm",
       "skipFiles": ["<node_internals>/**"],
       "type": "pwa-node"
