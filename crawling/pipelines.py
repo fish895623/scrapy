@@ -1,9 +1,3 @@
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-
-# useful for handling different item types with a single interface
 import sqlite3
 
 
@@ -14,7 +8,7 @@ class CrawlingPipeline:
         self.create_table()
 
     def create_table(self):
-        self.curr.execute("CREATE TABLE IF NOT EXISTS prod(name TEXT)")
+        self.curr.execute("CREATE TABLE IF NOT EXISTS prod (title TEXT, content TEXT)")
 
     # store items to databases.
     def process_item(self, item, spider):
@@ -23,7 +17,13 @@ class CrawlingPipeline:
 
     def putitemsintable(self, item):
         self.curr.execute(
-            "INSERT OR IGNORE INTO prod VALUES (?)",
-            (item["name"],),  # extracting item.
+            """
+            INSERT INTO prod (title, content)
+            SELECT '{0}', {1}
+            WHERE NOT EXISTS (SELECT 1 FROM prod WHERE title = '{0}', content = "{1}")
+            """.format(
+                item["title"],
+                item["content"],
+            ),
         )
         self.conn.commit()
