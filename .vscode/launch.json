@@ -4,6 +4,14 @@
       "name": "Python: Current File",
       "type": "python",
       "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "scrapy",
+      "type": "python",
+      "request": "launch",
       "program": "startscrapy.py",
       "console": "integratedTerminal",
       "justMyCode": true

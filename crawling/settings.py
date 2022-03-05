@@ -66,7 +66,6 @@ ROBOTSTXT_OBEY = True
 ITEM_PIPELINES = {
     "crawling.pipelines.CrawlingPipeline": 300,
 }
-LOG_LEVEL = "ERROR"
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

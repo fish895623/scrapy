@@ -1,6 +1,5 @@
-from operator import length_hint
 from scrapy import Spider, Request
-import re
+import time
 
 from crawling.items import CrawlingItem
 from scrapy.selector import Selector
@@ -22,14 +21,15 @@ class RimWorldSpider(Spider):
             "".join(hxs.xpath("//*[contains(@class, 'Announcement_Card')]").extract()),
             "html.parser",
         )
+        time.sleep(1)
         CardContentNewsTitle = data.select(".apphub_CardContentNewsTitle")
         CardTextContent = data.select(".apphub_CardTextContent")
         length = len(CardContentNewsTitle)
 
-        for _ in range(length):
+        for number in range(length):
             item = CrawlingItem()
-            for ContentNewsTitle in (i for i in CardContentNewsTitle):
-                item["title"] = ContentNewsTitle.text
-            for TextContent in (i for i in CardTextContent):
-                item["content"] = "".join(TextContent.getText("\n"))
-                yield item
+            item["title"] = CardContentNewsTitle[number].text
+            item["content"] = "".join(CardTextContent[number].getText("\n"))
+
+            self.logger.info(item)
+            yield item
