@@ -4,6 +4,7 @@
   "description": "",
   "main": "discord/dist/index.js",
   "scripts": {
+    "debug": "nodemon --watch 'discord/src/' -e ts --exec ts-node discord/src/index.ts",
     "build": "tsc",
     "start": "node ."
   },
@@ -19,7 +20,8 @@
   "homepage": "https://github.com/fish895623/scrapy#readme",
   "devDependencies": {
     "node-schedule": "^2.1.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.7.0"
   },
   "dependencies": {
     "@discordjs/rest": "^0.3.0",
