@@ -22,11 +22,11 @@
       "type": "pwa-node"
     },
     {
-      "name": "scrapy",
+      "name": "start",
       "request": "launch",
       "runtimeArgs": [
         "run",
-        "scrapy"
+        "start"
       ],
       "runtimeExecutable": "npm",
       "skipFiles": [
