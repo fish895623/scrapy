@@ -2,8 +2,9 @@
   "name": "scrapy",
   "version": "0.0.1",
   "description": "",
-  "main": "discord/index.js",
+  "main": "discord/dist/index.js",
   "scripts": {
+    "build": "tsc",
     "start": "node ."
   },
   "repository": {
