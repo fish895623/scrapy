@@ -9,12 +9,13 @@ client.on("ready", (msg: any) => {
   if (client.user != null) {
     console.log(`Logged in as ${client.user.tag}!`);
     // schedule.scheduleJob("* * * * *", () => {
-    msg.channels.cache.get("745512829188177931").send("<https://google.com/>");
+    msg.channels.cache.get(`${config.channelID[0]}`).send("<https://google.com/>");
     // });
+    console.log(config.channelID[0])
   }
 });
 
-client.on("messageCreate", (msg) => {
+client.on("messageCreate", (msg: any) => {
   if (msg.content === "ping") {
     msg.reply("Pong!");
   }
