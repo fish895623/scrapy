@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from datetime import datetime
 
 
 class CrawlingPipeline:
@@ -14,9 +15,11 @@ class CrawlingPipeline:
         if self.db.steam.find_one({"title": item["title"]}) == None:
             self.db.steam.insert_one(
                 {
+                    "name": item["name"],
+                    "address": item["address"],
                     "title": item["title"],
                     "content": item["content"],
-                    "date": item["date"],
+                    "date": datetime.now().strftime("%Y/%m/%d"),
                 }
             )
         else:
@@ -24,8 +27,10 @@ class CrawlingPipeline:
                 {"title": item["title"]},
                 {
                     "$set": {
+                        "name": item["name"],
+                        "address": item["address"],
                         "content": item["content"],
-                        "date": item["date"],
+                        "date": datetime.now().strftime("%Y/%m/%d"),
                     }
                 },
             )
