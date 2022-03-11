@@ -1,10 +1,36 @@
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
+from pymongo import MongoClient
+from datetime import datetime
 
-# useful for handling different item types with a single interface
 
 class CrawlingPipeline:
+    def __init__(self) -> None:
+        self.client = MongoClient(host="mongodb://root:example@localhost")
+        self.db = self.client.steam
+
     def process_item(self, item, spider):
+        self.putitemsintable(item)
         return item
+
+    def putitemsintable(self, item):
+        if self.db.steam.find_one({"title": item["title"]}) == None:
+            self.db.steam.insert_one(
+                {
+                    "name": item["name"],
+                    "address": item["address"],
+                    "title": item["title"],
+                    "content": item["content"],
+                    "date": datetime.now().strftime("%Y/%m/%d"),
+                }
+            )
+        else:
+            self.db.steam.update_one(
+                {"title": item["title"]},
+                {
+                    "$set": {
+                        "name": item["name"],
+                        "address": item["address"],
+                        "content": item["content"],
+                        "date": datetime.now().strftime("%Y/%m/%d"),
+                    }
+                },
+            )
