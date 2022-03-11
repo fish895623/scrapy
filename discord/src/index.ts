@@ -9,9 +9,11 @@ client.on("ready", (msg: any) => {
   if (client.user != null) {
     console.log(`Logged in as ${client.user.tag}!`);
     // schedule.scheduleJob("* * * * *", () => {
-    msg.channels.cache.get(`${config.channelID[0]}`).send("<https://google.com/>");
+    msg.channels.cache
+      .get(`${config.channelID[0]}`)
+      .send("asdf\n<https://google.com/>");
     // });
-    console.log(config.channelID[0])
+    console.log(config.channelID[0]);
   }
 });
 
