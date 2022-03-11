@@ -1,8 +1,10 @@
-import scrapy
+from scrapy import Item, Field
 
 
-class CrawlingItem(scrapy.Item):
-    title = scrapy.Field()
-    date = scrapy.Field()
-    content = scrapy.Field()
+class CrawlingItem(Item):
+    name = Field()
+    address = Field()
+    title = Field()
+    content = Field()
+    date = Field()
     pass
