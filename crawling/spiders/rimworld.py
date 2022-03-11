@@ -24,12 +24,14 @@ class RimWorldSpider(Spider):
         time.sleep(1)
         CardContentNewsTitle = data.select(".apphub_CardContentNewsTitle")
         CardTextContent = data.select(".apphub_CardTextContent")
+        CardContentNewsDate = data.select(".apphub_CardContentNewsDate")
         length = len(CardContentNewsTitle)
 
         for number in range(length):
             item = CrawlingItem()
             item["title"] = CardContentNewsTitle[number].text
             item["content"] = "".join(CardTextContent[number].getText("\n"))
+            item["date"] = CardContentNewsDate[number].text
 
             self.logger.info(item)
             yield item

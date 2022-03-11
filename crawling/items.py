@@ -9,5 +9,6 @@ import scrapy
 class CrawlingItem(scrapy.Item):
     # define the fields for your item here like:
     title = scrapy.Field()
+    date = scrapy.Field()
     content = scrapy.Field()
     pass

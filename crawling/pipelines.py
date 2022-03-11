@@ -11,11 +11,21 @@ class CrawlingPipeline:
         return item
 
     def putitemsintable(self, item):
-        if self.db.steam.find({"title": item["title"]}) == None:
+        if self.db.steam.find_one({"title": item["title"]}) == None:
             self.db.steam.insert_one(
-                {"title": item["title"], "content": item["content"]}
+                {
+                    "title": item["title"],
+                    "content": item["content"],
+                    "date": item["date"],
+                }
             )
         else:
             self.db.steam.update_one(
-                {"title": item["title"], "content": item["content"]}
+                {"title": item["title"]},
+                {
+                    "$set": {
+                        "content": item["content"],
+                        "date": item["date"],
+                    }
+                },
             )
