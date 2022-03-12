@@ -1,9 +1,11 @@
 const config = require("../../config.json");
+const db = config.mongodb;
+
 import { Client, Intents } from "discord.js";
 import mongoose from "mongoose";
 // const schedule = require("node-schedule");
 
-mongoose.connect(`mongodb://${config.mongodb.user}:${config.mongodb.password}@${config.mongodb.host}:${config.mongoose.port}`)
+mongoose.connect(`mongodb://${db.user}:${db.password}@${db.host}:${db.port}`);
 
 const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
