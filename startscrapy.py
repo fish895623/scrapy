@@ -1,7 +1,6 @@
-from scrapy.crawler import CrawlerProcess
-
-from crawling.spiders.rimworld import RimWorldSpider
 from crawling import settings
+from crawling.spiders.rimworld import RimWorldSpider
+from scrapy.crawler import CrawlerProcess
 from scrapy.settings import Settings
 
 if __name__ == "__main__":
