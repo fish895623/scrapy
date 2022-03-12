@@ -1,6 +1,9 @@
 const config = require("../../config.json");
 import { Client, Intents } from "discord.js";
+import mongoose from "mongoose";
 // const schedule = require("node-schedule");
+
+mongoose.connect(`mongodb://${config.mongodb.user}:${config.mongodb.password}@${config.mongodb.host}:${config.mongoose.port}`)
 
 const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
@@ -18,10 +21,10 @@ client.on("ready", (msg: any) => {
   }
 });
 
-client.on("messageCreate", (msg: any) => {
-  if (msg.content === "ping") {
-    msg.reply("Pong!");
-  }
-});
+// client.on("messageCreate", (msg: any) => {
+//   if (msg.content === "ping") {
+//     msg.reply("Pong!");
+//   }
+// });
 
 client.login(config.token);
