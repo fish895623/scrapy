@@ -31,6 +31,7 @@ class CrawlingPipeline:
                         "name": item["name"],
                         "address": item["address"],
                         "content": item["content"],
+                        # TODO Change date format
                         "date": datetime.now().strftime("%Y/%m/%d"),
                     }
                 },
