@@ -1,5 +1,5 @@
-const config = require("../../config.json");
-const db = config.mongodb;
+var { mongodb, channelID, token } = require("../../config.json").config;
+const db = mongodb;
 
 import { Client, Intents } from "discord.js";
 import mongoose from "mongoose";
@@ -16,10 +16,10 @@ client.on("ready", (msg: any) => {
     console.log(`Logged in as ${client.user.tag}!`);
     // schedule.scheduleJob("* * * * *", () => {
     msg.channels.cache
-      .get(`${config.channelID[0]}`)
+      .get(`${channelID[0]}`)
       .send("asdf\n<https://google.com/>");
     // });
-    console.log(config.channelID[0]);
+    console.log(channelID[0]);
   }
 });
 
@@ -29,4 +29,4 @@ client.on("ready", (msg: any) => {
 //   }
 // });
 
-client.login(config.token);
+client.login(token);
