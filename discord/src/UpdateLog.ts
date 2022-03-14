@@ -15,6 +15,22 @@ log4js.configure({
 var url = `mongodb://${db.host}:${db.port}/`;
 
 class ContentMongoDB {
+  private modelPerson = mongoose.model(
+    "steams",
+    new Schema({ date: String }, { collection: "steam" })
+  );
+  /**
+   *
+   * @example
+   * new ContentMongoDB().getContent("2022-03-14").then((data: any) => {
+   *   data.forEach((element: any) => {
+   *     console.log(element);
+   *   });
+   *   logger.info("Get Data");
+   * });
+   * @param date Set date to search
+   * @returns
+   */
   getContent(date: string) {
     return new Promise((resolve, reject) => {
       mongoose.connect(
@@ -24,7 +40,7 @@ class ContentMongoDB {
           if (err) {
             reject(err);
           }
-          resolve(await modelPerson.find({ date: date }));
+          resolve(await this.modelPerson.find({ date: date }));
           await mongoose.connection.close();
         }
       );
@@ -32,14 +48,9 @@ class ContentMongoDB {
   }
 }
 
-var modelPerson = mongoose.model(
-  "steams",
-  new Schema({ date: String }, { collection: "steam" })
-);
-
 mongoose.connection
   .on("error", (err: any) => {
-    logger.warn(err);
+    logger.error(err);
   })
   .once("open", () => {
     logger.debug("DB Connected");
