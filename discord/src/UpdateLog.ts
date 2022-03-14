@@ -14,38 +14,52 @@ log4js.configure({
 
 var url = `mongodb://${db.host}:${db.port}/`;
 
-var Person = new Schema({ date: String }, { collection: "steam" });
-var modelPerson = mongoose.model("steams", Person);
+class ContentMongoDB {
+  private modelPerson = mongoose.model(
+    "steams",
+    new Schema({ date: String }, { collection: "steam" })
+  );
+  /**
+   * @example
+   * new ContentMongoDB().getContent("2022-03-14").then((data: any) => {
+   *   data.forEach((element: any) => {
+   *     console.log(element);
+   *   });
+   *   logger.info("Get Data");
+   * });
+   * @param date Set date to search
+   * @returns name, address, title, content, date
+   */
+  getContent(date: string) {
+    return new Promise((resolve, reject) => {
+      mongoose.connect(
+        url,
+        { user: `${db.user}`, pass: `${db.password}`, dbName: "steam" },
+        async (err: any) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(await this.modelPerson.find({ date: date }));
+          await mongoose.connection.close();
+        }
+      );
+    });
+  }
+}
 
 mongoose.connection
   .on("error", (err: any) => {
-    logger.warn(err);
+    logger.error(err);
   })
   .once("open", () => {
     logger.debug("DB Connected");
   });
 
-function getContent(date: string) {
-  return new Promise((resolve, reject) => {
-    mongoose.connect(
-      url,
-      { user: `${db.user}`, pass: `${db.password}`, dbName: "steam" },
-      async (err: any) => {
-        if (err) {
-          reject(err);
-        }
-        resolve(await modelPerson.find({ date: date }));
-        await mongoose.connection.close();
-      }
-    );
-  });
-}
-
-getContent("2022-03-14").then((data: any) => {
+new ContentMongoDB().getContent("2022-03-14").then((data: any) => {
   data.forEach((element: any) => {
     console.log(element);
   });
   logger.info("Get Data");
 });
 
-export { getContent };
+export { ContentMongoDB };
