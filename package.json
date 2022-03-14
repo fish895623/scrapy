@@ -6,7 +6,8 @@
   "scripts": {
     "debug": "nodemon --watch 'discord/src/' -e ts --exec ts-node discord/src/index.ts",
     "build": "tsc",
-    "start": "node ."
+    "start": "node .",
+    "debug:aa": "ts-node discord/src/UpdateLog.ts"
   },
   "repository": {
     "type": "git",

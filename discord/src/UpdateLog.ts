@@ -1,20 +1,24 @@
 // To export Update log
-var { mongodb } = require("../../config.json").config;
-const db = mongodb;
-import mongoose from "mongoose";
+const config = require("../../config.json");
+const db = config.mongodb;
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-mongoose.connect(`mongodb://${db.user}:${db.password}@${db.host}:${db.port}`);
-const Fruit = mongoose.model(
-  "steam",
-  new mongoose.Schema({
-    name: String,
-    address: String,
-    title: String,
-    content: String,
-  })
-);
+var url = `mongodb://${db.user}:${db.password}@${db.host}:${db.port}`;
 
-Fruit.find({ name: "rimworld" }, function (err, docs) {
-  console.log(err, docs);
+var Person = new Schema({ data: Number });
+var modelPerson = new mongoose.model("steams", Person);
+
+mongoose.connect(url, async (err: any) => {
+  if (err) console.error(err);
+  var a = await modelPerson.find({ data: 123 });
+  console.log(a);
+  await mongoose.connection.close();
 });
-mongoose.connection.close();
+mongoose.connection
+  .on("error", (err: any) => {
+    console.warn(err);
+  })
+  .once("open", () => {
+    console.log("DB Connected");
+  });
