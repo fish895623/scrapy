@@ -31,7 +31,9 @@ function getContent(date: string) {
       url,
       { user: `${db.user}`, pass: `${db.password}`, dbName: "steam" },
       async (err: any) => {
-        if (err) console.error(err);
+        if (err) {
+          reject(err);
+        }
         resolve(await modelPerson.find({ date: date }));
         await mongoose.connection.close();
       }
