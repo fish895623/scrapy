@@ -3,3 +3,4 @@
 
 discord/dist
 config.*
+*.log
