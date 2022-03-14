@@ -13,17 +13,18 @@ client.on("ready", async (msg: any) => {
     console.log(`Logged in as ${client.user.tag}!`);
     // schedule.scheduleJob("* * * * *", () => { // TODO Call from
     const Data = new ContentMongoDB();
-    await Data.getRawData(
-      `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
-    ).then((data: any) => {
-      data.forEach((element: any) => {
-        console.log(element);
+    const a: any = await new Promise((resolve) => {
+      Data.getRawData(
+        `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+      ).then((data: any) => {
+        resolve(data);
       });
     });
-    msg.channels.cache
-      .get(`${channelID[0]}`)
-      .send("asdf\n<https://google.com/>");
-    // });
+    a.forEach((element: any) => {
+      msg.channels.cache
+        .get(`${channelID[0]}`)
+        .send(`${element.title}\n\n\n${element.name}`);
+    });
     console.log(channelID[0]);
   }
 });
