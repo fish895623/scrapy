@@ -1,22 +1,15 @@
 // To export Update log
-const config = require("../../config.json");
-const db = config.mongodb;
+import { mongodb } from "./config.json";
+const db = mongodb;
 
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
-
-import log4js from "log4js";
-const logger = log4js.getLogger();
-log4js.configure({
-  appenders: { cheese: { type: "file", filename: "cheese.log" } },
-  categories: { default: { appenders: ["cheese"], level: "trace" } },
-});
 
 var url = `mongodb://${db.host}:${db.port}/`;
 
 class ContentMongoDB {
   private modelPerson = mongoose.model(
-    "steams",
+    "steam",
     new Schema({ date: String }, { collection: "steam" })
   );
   /**
@@ -30,7 +23,7 @@ class ContentMongoDB {
    * @param date Set date to search
    * @returns name, address, title, content, date
    */
-  getContent(date: string) {
+  getRawData(date: string) {
     return new Promise((resolve, reject) => {
       mongoose.connect(
         url,
@@ -47,22 +40,13 @@ class ContentMongoDB {
   }
 }
 
-mongoose.connection
-  .on("error", (err: any) => {
-    logger.error(err);
-  })
-  .once("open", () => {
-    logger.info("DB Connected");
-  });
-
 const date = new Date();
 new ContentMongoDB()
-  .getContent(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
+  .getRawData(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
   .then((data: any) => {
     data.forEach((element: any) => {
       console.log(element);
     });
-    logger.info("Get Data");
   });
 
-export { ContentMongoDB };
+export { ContentMongoDB, date };
