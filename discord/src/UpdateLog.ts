@@ -12,9 +12,9 @@ log4js.configure({
   categories: { default: { appenders: ["cheese"], level: "trace" } },
 });
 
-var url = `mongodb://${db.user}:${db.password}@${db.host}:${db.port}`;
+var url = `mongodb://${db.host}:${db.port}/`;
 
-var Person = new Schema({ data: Number });
+var Person = new Schema({ date: String }, { collection: "steam" });
 var modelPerson = mongoose.model("steams", Person);
 
 mongoose.connection
@@ -25,18 +25,25 @@ mongoose.connection
     logger.debug("DB Connected");
   });
 
-function getContent() {
+function getContent(date: string) {
   return new Promise((resolve, reject) => {
-    mongoose.connect(url, async (err: any) => {
-      if (err) console.error(err);
-      var a = await modelPerson.find({ data: 123 });
-      resolve(a);
-      await mongoose.connection.close();
-    });
+    mongoose.connect(
+      url,
+      { user: `${db.user}`, pass: `${db.password}`, dbName: "steam" },
+      async (err: any) => {
+        if (err) console.error(err);
+        resolve(await modelPerson.find({ date: date }));
+        await mongoose.connection.close();
+      }
+    );
   });
 }
 
-getContent().then((data) => {
-  logger.debug(data);
+getContent("2022-03-14").then((data: any) => {
+  data.forEach((element: any) => {
+    console.log(element);
+  });
   logger.info("Get Data");
 });
+
+export { getContent };
