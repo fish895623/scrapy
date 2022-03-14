@@ -52,14 +52,17 @@ mongoose.connection
     logger.error(err);
   })
   .once("open", () => {
-    logger.debug("DB Connected");
+    logger.info("DB Connected");
   });
 
-new ContentMongoDB().getContent("2022-03-14").then((data: any) => {
-  data.forEach((element: any) => {
-    console.log(element);
+const date = new Date();
+new ContentMongoDB()
+  .getContent(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
+  .then((data: any) => {
+    data.forEach((element: any) => {
+      console.log(element);
+    });
+    logger.info("Get Data");
   });
-  logger.info("Get Data");
-});
 
 export { ContentMongoDB };

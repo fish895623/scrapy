@@ -20,7 +20,7 @@ class CrawlingPipeline:
                     "address": item["address"],
                     "title": item["title"],
                     "content": item["content"],
-                    "date": datetime.now().strftime("%Y-%m-%d"),
+                    "date": datetime.now().strftime("%Y-%-m-%d"),
                 }
             )
         else:
