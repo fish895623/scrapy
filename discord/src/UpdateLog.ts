@@ -20,7 +20,6 @@ class ContentMongoDB {
     new Schema({ date: String }, { collection: "steam" })
   );
   /**
-   *
    * @example
    * new ContentMongoDB().getContent("2022-03-14").then((data: any) => {
    *   data.forEach((element: any) => {
@@ -29,7 +28,7 @@ class ContentMongoDB {
    *   logger.info("Get Data");
    * });
    * @param date Set date to search
-   * @returns
+   * @returns name, address, title, content, date
    */
   getContent(date: string) {
     return new Promise((resolve, reject) => {
