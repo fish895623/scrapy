@@ -10,7 +10,10 @@ var url = `mongodb://${db.host}:${db.port}/`;
 class ContentMongoDB {
   private modelPerson = mongoose.model(
     "steam",
-    new Schema({ date: String }, { collection: "steam" })
+    new Schema(
+      { name: String, title: String, date: String }, // NOTE need this to find type
+      { collection: "steam" }
+    )
   );
   /**
    * @example
@@ -41,12 +44,5 @@ class ContentMongoDB {
 }
 
 const date = new Date();
-new ContentMongoDB()
-  .getRawData(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
-  .then((data: any) => {
-    data.forEach((element: any) => {
-      console.log(element);
-    });
-  });
 
 export { ContentMongoDB, date };
