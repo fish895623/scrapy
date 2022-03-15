@@ -1,5 +1,6 @@
-from pymongo import MongoClient
 from datetime import datetime
+
+from pymongo import MongoClient
 
 
 class CrawlingPipeline:
@@ -12,14 +13,14 @@ class CrawlingPipeline:
         return item
 
     def putitemsintable(self, item):
-        if self.db.steam.find_one({"title": item["title"]}) == None:
+        if self.db.steam.find_one({"title": item["title"]}) is None:
             self.db.steam.insert_one(
                 {
                     "name": item["name"],
                     "address": item["address"],
                     "title": item["title"],
                     "content": item["content"],
-                    "date": datetime.now().strftime("%Y/%m/%d"),
+                    "date": datetime.now().strftime("%Y-%-m-%d"),
                 }
             )
         else:
@@ -30,7 +31,6 @@ class CrawlingPipeline:
                         "name": item["name"],
                         "address": item["address"],
                         "content": item["content"],
-                        "date": datetime.now().strftime("%Y/%m/%d"),
                     }
                 },
             )
