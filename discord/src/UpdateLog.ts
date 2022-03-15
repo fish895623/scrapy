@@ -11,7 +11,7 @@ class ContentMongoDB {
   private modelPerson = mongoose.model(
     "steam",
     new Schema(
-      { name: String, title: String, date: String }, // NOTE need this to find type
+      { name: String, title: String, date: String, address: String }, // NOTE need this to find type
       { collection: "steam" }
     )
   );

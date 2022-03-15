@@ -23,7 +23,7 @@ client.on("ready", async (msg: any) => {
     a.forEach((element: any) => {
       msg.channels.cache
         .get(`${channelID[0]}`)
-        .send(`${element.title}\n\n\n${element.name}`);
+        .send(`*${element.title}*\n\n\n${element.name}\n${element.address}`);
     });
     console.log(channelID[0]);
   }
