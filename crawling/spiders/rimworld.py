@@ -8,22 +8,22 @@ from scrapy.selector import Selector
 
 
 class RimWorldSpider(Spider):
-    name = "rimworld"
-    url = "294100"
+    name = "steam"
 
     def start_requests(self):
-        yield Request(
-            url="https://steamcommunity.com/app/" + self.url,
-            callback=self.parse_title,
-        )
+        urls = ["294100", "1091500"]
+        return [
+            Request(url="https://steamcommunity.com/app/" + url, callback=self.parse)
+            for url in urls
+        ]
 
-    def parse_title(self, response):
+    def parse(self, response):
         hxs = Selector(response)
         data = BeautifulSoup(
             "".join(hxs.xpath("//*[contains(@class, 'Announcement_Card')]").extract()),
             "html.parser",
         )
-        time.sleep(1)
+
         CardContentNewsTitle = data.select(".apphub_CardContentNewsTitle")
         CardTextContent = data.select(".apphub_CardTextContent")
         CardContentNewsDate = data.select(".apphub_CardContentNewsDate")
@@ -31,11 +31,11 @@ class RimWorldSpider(Spider):
 
         for number in range(length):
             item = CrawlingItem()
-            item["name"] = self.name
-            item["address"] = "https://steamcommunity.com/app/" + self.url
+            item["name"] = response.css(".apphub_AppName::text").extract()[0]
+            item["address"] = response.url
             item["title"] = CardContentNewsTitle[number].text
             item["content"] = "".join(CardTextContent[number].getText("\n"))
             item["date"] = CardContentNewsDate[number].text
 
             self.logger.info(item)
-            yield item
+            return item
