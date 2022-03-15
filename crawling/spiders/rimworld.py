@@ -7,7 +7,7 @@ from scrapy import Request, Spider
 from scrapy.selector import Selector
 
 
-class RimWorldSpider(Spider):
+class SteamSpider(Spider):
     name = "steam"
 
     def start_requests(self):
