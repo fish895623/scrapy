@@ -1,5 +1,4 @@
 from bs4 import BeautifulSoup
-
 from crawling.items import CrawlingItem
 from scrapy import Request, Spider
 from scrapy.selector import Selector
