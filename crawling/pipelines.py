@@ -9,10 +9,10 @@ class CrawlingPipeline:
         self.db = self.client.steam
 
     def process_item(self, item, spider):
-        self.putitemsintable(item)
+        self.put_items_in_table(item)
         return item
 
-    def putitemsintable(self, item):
+    def put_items_in_table(self, item):
         if self.db.steam.find_one({"title": item["title"]}) is None:
             self.db.steam.insert_one(
                 {
