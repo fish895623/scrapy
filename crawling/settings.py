@@ -7,11 +7,11 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = "crawling"
-# LOG_LEVEL = "ERROR"
+BOT_NAME = 'crawling'
+# LOG_LEVEL = 'ERROR'
 
-SPIDER_MODULES = ["crawling.spiders"]
-NEWSPIDER_MODULE = "crawling.spiders"
+SPIDER_MODULES = ['crawling.spiders']
+NEWSPIDER_MODULE = 'crawling.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -64,7 +64,7 @@ DOWNLOAD_DELAY = 3
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    "crawling.pipelines.CrawlingPipeline": 300,
+    'crawling.pipelines.CrawlingPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
