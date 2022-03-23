@@ -4,3 +4,5 @@
 discord/dist
 config.*
 *.log
+
+.idea/
