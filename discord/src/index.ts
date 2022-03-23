@@ -20,7 +20,7 @@ client.on("ready", async (msg: any) => {
         resolve(data);
       });
     });
-    a.forEach((element: any) => {
+    a.forEach((element: any) => { // TODO set interface content interface
       msg.channels.cache
         .get(`${channelID[0]}`)
         .send(`*${element.title}*\n\n\n${element.name}\n${element.address}`);

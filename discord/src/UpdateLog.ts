@@ -1,4 +1,3 @@
-// To export Update log
 import { mongodb } from "./config.json";
 const db = mongodb;
 
@@ -15,6 +14,7 @@ class ContentMongoDB {
       { collection: "steam" }
     )
   );
+
   /**
    * @example
    * new ContentMongoDB().getContent("2022-03-14").then((data: any) => {
@@ -26,7 +26,7 @@ class ContentMongoDB {
    * @param date Set date to search
    * @returns name, address, title, content, date
    */
-  getRawData(date: string) {
+  getRawData(date: string): Promise<any> { // TODO Change types
     return new Promise((resolve, reject) => {
       mongoose.connect(
         url,
