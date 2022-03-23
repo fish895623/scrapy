@@ -1,9 +1,6 @@
 **/__pycache__/**
 **/node_modules/**
 
-.idea/
-.vscode/
-
-dist
-*.js
-*.tsbuildinfo
+discord/dist
+config.*
+*.log
