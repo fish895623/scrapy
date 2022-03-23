@@ -2,9 +2,9 @@
   "name": "scrapy",
   "version": "0.0.1",
   "description": "",
-  "main": "discord/dist/index.js",
+  "main": "discord/dist/GameNews.js",
   "scripts": {
-    "debug": "nodemon --watch 'discord/src/' -e ts --exec ts-node discord/src/index.ts",
+    "debug": "nodemon --watch 'discord/src/' -e ts --exec ts-node discord/src/GameNews.ts",
     "build": "tsc",
     "start": "node .",
     "debug:aa": "ts-node discord/src/UpdateLog.ts"
