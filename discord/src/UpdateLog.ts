@@ -26,7 +26,7 @@ class ContentMongoDB {
    * @param date Set date to search
    * @returns name, address, title, content, date
    */
-  getRawData(date: string): Promise<any> { // TODO Change types
+  getRawData(date: string) { // TODO Change types
     return new Promise((resolve, reject) => {
       mongoose.connect(
         url,
