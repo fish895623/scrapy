@@ -1,8 +1,7 @@
 import { mongodb } from "./config.json";
 const db = mongodb;
 
-import mongoose from "mongoose";
-const Schema = mongoose.Schema;
+import mongoose, { Schema } from "mongoose";
 
 var url = `mongodb://${db.host}:${db.port}/`;
 
@@ -26,7 +25,9 @@ class ContentMongoDB {
    * @param date Set date to search
    * @returns name, address, title, content, date
    */
-  getRawData(date: string) { // TODO Change types
+  getRawData(date: string) {
+    // TODO Change types
+    // TODO Set Logger
     return new Promise((resolve, reject) => {
       mongoose.connect(
         url,

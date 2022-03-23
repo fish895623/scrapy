@@ -14,20 +14,20 @@ client.on("ready", async (msg: any) => {
     console.log(`Logged in as ${client.user.tag}!`);
     // schedule.scheduleJob("* * * * *", () => { // TODO Call from
     const Data = new ContentMongoDB();
-    const a: any = await new Promise((resolve) => {
+    const dataFromMongo: any = await new Promise((resolve) => {
       Data.getRawData(
         `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
       ).then((data: any) => {
         resolve(data);
       });
     });
-    a.forEach((element: Content) => {
+    dataFromMongo.forEach((element: Content) => {
       // TODO set interface content interface
+      // TODO Set Logger
       msg.channels.cache
         .get(`${channelID[0]}`)
         .send(`*${element.title}*\n\n\n${element.name}\n${element.address}`);
     });
-    console.log(channelID[0]);
   }
 });
 
