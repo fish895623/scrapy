@@ -1,5 +1,8 @@
 `config.json` configuration
 
+
+steam[] https://steamcommunity.com/app/1245620
+
 ```json
 {
   "channelID": ["__channelID__"],
@@ -9,6 +12,9 @@
     "user": "__username__",
     "password": "__password__"
   },
-  "token": "__Discord_bot_token__"
+  "token": "__Discord_bot_token__",
+  "steam": [
+    "__community__app__number ex) 1245620, type) number"
+  ]
 }
 ```
