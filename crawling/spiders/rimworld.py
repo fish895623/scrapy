@@ -1,17 +1,25 @@
+import json
+import pathlib
+
 from bs4 import BeautifulSoup
 
 from crawling.items import CrawlingItem
 from scrapy import Request, Spider
 from scrapy.selector import Selector
 
+ROOT_DIR = pathlib.Path(__file__).parent.absolute().parent.parent
+
+with open(f'{ROOT_DIR}/discord/src/config.json', 'r') as file:
+    CONFIG = json.load(file)
+
 
 class SteamSpider(Spider):
     name = 'steam'
 
     def start_requests(self):
-        urls = ['294100', '1091500']
+        urls = CONFIG['steam']
         return [
-            Request(url='https://steamcommunity.com/app/' + url, callback=self.parse)
+            Request(url=f'https://steamcommunity.com/app/{url}', callback=self.parse)
             for url in urls
         ]
 
