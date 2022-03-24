@@ -2,12 +2,10 @@
   "name": "scrapy",
   "version": "0.0.1",
   "description": "",
-  "main": "discord/dist/GameNews.js",
+  "main": "discord/src/GameNews.ts",
   "scripts": {
     "debug": "nodemon --watch 'discord/src/' -e ts --exec ts-node discord/src/GameNews.ts",
-    "build": "tsc",
-    "start": "node .",
-    "debug:aa": "ts-node discord/src/UpdateLog.ts"
+    "start": "ts-node ."
   },
   "repository": {
     "type": "git",
