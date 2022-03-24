@@ -7,6 +7,8 @@ if exists(f'{ROOT_DIR}/discord/src/config.json'):
     with open(f'{ROOT_DIR}/discord/src/config.json', 'r') as file:
         CONFIG = json.load(file)
 else:
+    # TODO Get decoded data and
+    # NOTE use json.loads function to get data
     pass
 
 

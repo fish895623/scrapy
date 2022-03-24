@@ -6,6 +6,7 @@ from scrapy.crawler import CrawlerProcess
 from scrapy.settings import Settings
 
 if __name__ == '__main__':
+    # TODO Decode base64
     for i in sys.argv:
         print(i)
     crawler_settings = Settings()
