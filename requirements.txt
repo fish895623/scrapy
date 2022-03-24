@@ -1,4 +1,4 @@
 pymongo~=4.0.2
 scrapy~=2.5.1
 bs4~=0.0.1
-black~=22.1.0
+git+https://github.com/davvid/black.git@single-quotes
