@@ -1,16 +1,10 @@
-import json
-import pathlib
-
 from bs4 import BeautifulSoup
 
 from crawling.items import CrawlingItem
 from scrapy import Request, Spider
 from scrapy.selector import Selector
 
-ROOT_DIR = pathlib.Path(__file__).parent.absolute().parent.parent
-
-with open(f'{ROOT_DIR}/discord/src/config.json', 'r') as file:
-    CONFIG = json.load(file)
+from ..settings import CONFIG
 
 
 class SteamSpider(Spider):

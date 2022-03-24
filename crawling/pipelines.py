@@ -1,11 +1,19 @@
 from datetime import datetime
 
 from pymongo import MongoClient
+from settings import CONFIG
 
 
 class CrawlingPipeline:
     def __init__(self) -> None:
-        self.client = MongoClient(host='mongodb://root:example@192.168.0.6')
+        self.client = MongoClient(
+            host='mongodb://{0}:{1}@{2}:{3}'.format(
+                CONFIG['mongodb']['user'],
+                CONFIG['mongodb']['password'],
+                CONFIG['mongodb']['host'],
+                CONFIG['mongodb']['port'],
+            )
+        )
         self.db = self.client.steam
 
     def process_item(self, item, spider):
@@ -20,7 +28,9 @@ class CrawlingPipeline:
                     'address': item['address'],
                     'title': item['title'],
                     'content': item['content'],
-                    'date': f'{datetime.now().year}-{datetime.now().month}-{datetime.now().day}',
+                    'date': '{0}-{1}-{2}'.format(
+                        datetime.now().year, datetime.now().month, datetime.now().day
+                    ),
                 }
             )
         else:

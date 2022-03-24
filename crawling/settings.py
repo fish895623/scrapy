@@ -1,11 +1,9 @@
-# Scrapy settings for crawling project
-#
-# For simplicity, this file contains only settings considered important or
-# commonly used. You can find more settings consulting the documentation:
-#
-#     https://docs.scrapy.org/en/latest/topics/settings.html
-#     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
+import json
+import pathlib
+
+ROOT_DIR = pathlib.Path(__file__).parent.absolute().parent
+with open(f'{ROOT_DIR}/discord/src/config.json', 'r') as file:
+    CONFIG = json.load(file)
 
 BOT_NAME = 'crawling'
 # LOG_LEVEL = 'ERROR'
@@ -63,9 +61,7 @@ DOWNLOAD_DELAY = 3
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-    'crawling.pipelines.CrawlingPipeline': 300,
-}
+ITEM_PIPELINES = {'crawling.pipelines.CrawlingPipeline': 300}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
