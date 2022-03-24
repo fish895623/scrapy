@@ -1,12 +1,17 @@
 import json
 import pathlib
+from os.path import exists
 
 ROOT_DIR = pathlib.Path(__file__).parent.absolute().parent
-with open(f'{ROOT_DIR}/discord/src/config.json', 'r') as file:
-    CONFIG = json.load(file)
+if exists(f'{ROOT_DIR}/discord/src/config.json'):
+    with open(f'{ROOT_DIR}/discord/src/config.json', 'r') as file:
+        CONFIG = json.load(file)
+else:
+    pass
+
 
 BOT_NAME = 'crawling'
-# LOG_LEVEL = 'ERROR'
+LOG_LEVEL = 'ERROR'
 
 SPIDER_MODULES = ['crawling.spiders']
 NEWSPIDER_MODULE = 'crawling.spiders'

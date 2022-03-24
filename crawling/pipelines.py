@@ -1,7 +1,8 @@
 from datetime import datetime
 
 from pymongo import MongoClient
-from settings import CONFIG
+
+from .settings import CONFIG
 
 
 class CrawlingPipeline:
