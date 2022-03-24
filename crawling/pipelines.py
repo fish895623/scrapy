@@ -5,7 +5,7 @@ from pymongo import MongoClient
 
 class CrawlingPipeline:
     def __init__(self) -> None:
-        self.client = MongoClient(host='mongodb://root:example@localhost')
+        self.client = MongoClient(host='mongodb://root:example@192.168.0.6')
         self.db = self.client.steam
 
     def process_item(self, item, spider):
@@ -20,7 +20,7 @@ class CrawlingPipeline:
                     'address': item['address'],
                     'title': item['title'],
                     'content': item['content'],
-                    'date': datetime.now().strftime('%Y-%-m-%d'),
+                    'date': f'{datetime.now().year}-{datetime.now().month}-{datetime.now().day}',
                 }
             )
         else:
