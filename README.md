@@ -1,4 +1,5 @@
 `config.json` configuration
+located on `discord/src/config.json`
 
 
 steam[] https://steamcommunity.com/app/1245620
