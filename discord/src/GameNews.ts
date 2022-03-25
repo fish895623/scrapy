@@ -20,7 +20,7 @@ const client = new Client({
 
 client.on("ready", async (msg: any) => {
   if (client.user != null) {
-    console.log(`Logged in as ${client.user.tag}!`);
+    logger.info(`Logged in as ${client.user.tag}!`);
     // TODO Call from
     // schedule.scheduleJob("* * * * *", () => {
     const Data = new ContentMongoDB();
@@ -41,4 +41,4 @@ client.on("ready", async (msg: any) => {
   }
 });
 
-client.login(token).then((res) => logger.info(res));
+client.login(token).then();
