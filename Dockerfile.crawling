@@ -1,0 +1,12 @@
+FROM python:3.9-buster
+
+WORKDIR /workspace
+COPY requirements.txt /workspace/
+COPY crawling /workspace/crawling
+COPY scrapy.cfg /workspace/
+COPY startscrapy.py /workspace/
+
+RUN apt-get update && apt-get -y install git
+RUN pip install -I --no-cache-dir -r requirements.txt
+
+CMD ["python3", "startscrapy.py"]

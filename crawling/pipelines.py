@@ -1,18 +1,20 @@
+import os
 from datetime import datetime
 
+import dotenv
 from pymongo import MongoClient
 
-from .settings import CONFIG
+dotenv.load_dotenv()
 
 
 class CrawlingPipeline:
     def __init__(self) -> None:
         self.client = MongoClient(
             host='mongodb://{0}:{1}@{2}:{3}'.format(
-                CONFIG['mongodb']['user'],
-                CONFIG['mongodb']['password'],
-                CONFIG['mongodb']['host'],
-                CONFIG['mongodb']['port'],
+                os.getenv('DB_USER'),
+                os.getenv('DB_PASS'),
+                os.getenv('DB_HOST'),
+                os.getenv('DB_PORT'),
             )
         )
         self.db = self.client.steam
