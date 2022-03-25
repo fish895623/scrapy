@@ -19,7 +19,15 @@ steam[] https://steamcommunity.com/app/1245620
   ]
 }
 ```
-
+```dotenv
+TOKEN=discordapp_token
+CHANNEL_ID=Text_Channel_Id_To_Upload_noti
+DB_HOST=mongodb
+DB_PORT=27017
+DB_USER=root
+DB_PASS=example
+STEAM=communityAppNumber
+```
 ## Develop Environment
 
 - Python 3.9
