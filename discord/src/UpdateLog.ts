@@ -1,9 +1,11 @@
-import { mongodb } from "./config.json";
-const db = mongodb;
+const host = process.env.DB_HOST;
+const port = process.env.DB_PORT;
+const user = process.env.DB_USER;
+const pass = process.env.DB_PASS;
 
 import mongoose, { Schema } from "mongoose";
 
-var url = `mongodb://${db.host}:${db.port}/`;
+const url = `mongodb://${host}:${port}/`;
 
 class ContentMongoDB {
   private modelPerson = mongoose.model(
@@ -31,7 +33,7 @@ class ContentMongoDB {
     return new Promise((resolve, reject) => {
       mongoose.connect(
         url,
-        { user: `${db.user}`, pass: `${db.password}`, dbName: "steam" },
+        { user: `${user}`, pass: `${pass}`, dbName: "steam" },
         async (err: any) => {
           if (err) {
             reject(err);

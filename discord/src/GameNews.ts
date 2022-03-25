@@ -1,14 +1,15 @@
 import path from "path";
-import { channelID, token } from "./config.json";
-
 import { Client, Intents } from "discord.js";
 import { ContentMongoDB, date } from "./UpdateLog";
 // const schedule = require("node-schedule");
-
 // NOTE Interface
 import { Content } from "./interface/Contents";
 
 import log4js from "log4js";
+
+const token = process.env.TOKEN || require("./config.json").token;
+const channelID = process.env.CHANNEL_ID || require("./config.json").channelID;
+
 log4js.configure(path.join(__dirname, "log4js.json"));
 
 const logger = log4js.getLogger("logTest");
