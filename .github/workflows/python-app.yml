@@ -35,4 +35,4 @@ jobs:
       env:
         TOKEN: ${{ secrets.CONFIG }}
       run: |
-        echo $TOKEN | base64 -d - > .env
+        echo $TOKEN > .env
