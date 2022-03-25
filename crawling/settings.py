@@ -1,17 +1,3 @@
-import json
-import pathlib
-from os.path import exists
-
-ROOT_DIR = pathlib.Path(__file__).parent.absolute().parent
-if exists(f'{ROOT_DIR}/discord/src/config.json'):
-    with open(f'{ROOT_DIR}/discord/src/config.json', 'r') as file:
-        CONFIG = json.load(file)
-else:
-    # TODO Get decoded data and
-    # NOTE use json.loads function to get data
-    pass
-
-
 BOT_NAME = 'crawling'
 LOG_LEVEL = 'ERROR'
 

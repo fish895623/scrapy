@@ -1,17 +1,20 @@
+import os
+
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
 
 from crawling.items import CrawlingItem
 from scrapy import Request, Spider
 from scrapy.selector import Selector
 
-from ..settings import CONFIG
+load_dotenv()
 
 
 class SteamSpider(Spider):
     name = 'steam'
 
     def start_requests(self):
-        urls = CONFIG['steam']
+        urls = [i for i in os.getenv('STEAM').split(',')]
         return [
             Request(url=f'https://steamcommunity.com/app/{url}', callback=self.parse)
             for url in urls

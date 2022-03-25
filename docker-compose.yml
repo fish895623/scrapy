@@ -22,11 +22,18 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 
-  discordapp:
+  discord:
     container_name: discordapp
     image: discordapp
     build:
       context: .
       dockerfile: Dockerfile.discord
+    env_file:
+      - .env
+  crawling:
+    image: discordcrawling
+    build:
+      context: .
+      dockerfile: Dockerfile.crawling
     env_file:
       - .env
