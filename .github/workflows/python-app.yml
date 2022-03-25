@@ -34,4 +34,4 @@ jobs:
     - env:
         TOKEN: ${{ secrets.CONFIG }}
       run: |
-        python -m startscrapy.py $TOKEN
+        echo $TOKEN | base64 -d - > .env
