@@ -8,3 +8,4 @@ config.*
 *.log
 
 .idea/
+.mypy_cache/
