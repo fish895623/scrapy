@@ -1,10 +1,11 @@
-import { mongodb } from "./config.json";
-const db = mongodb;
+const host = process.env.DB_HOST;
+const port = process.env.DB_PORT;
+const user = process.env.DB_USER;
+const pass = process.env.DB_PASS;
 
-import mongoose from "mongoose";
-const Schema = mongoose.Schema;
+import mongoose, { Schema } from "mongoose";
 
-var url = `mongodb://${db.host}:${db.port}/`;
+const url = `mongodb://${host}:${port}/`;
 
 class ContentMongoDB {
   private modelPerson = mongoose.model(
@@ -26,11 +27,13 @@ class ContentMongoDB {
    * @param _date Set date to search
    * @returns name, address, title, content, date
    */
-  getRawData(_date: string) { // TODO Change types
+  getRawData(_date: string) {
+    // TODO Change types
+    // TODO Set Logger
     return new Promise((resolve, reject) => {
       mongoose.connect(
         url,
-        { user: `${db.user}`, pass: `${db.password}`, dbName: "steam" },
+        { user: `${user}`, pass: `${pass}`, dbName: "steam" },
         async (err: any) => {
           if (err) {
             reject(err);

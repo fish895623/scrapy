@@ -1,0 +1,10 @@
+FROM node:16.14
+
+WORKDIR /workspace
+COPY discord/ /workspace/discord/
+COPY package.json /workspace
+COPY package-lock.json /workspace
+
+RUN npm install
+
+CMD ["npm", "run", "start"]
