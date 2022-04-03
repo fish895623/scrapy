@@ -1,7 +1,7 @@
 import { channelID, token } from "./config.json";
 
 import { Client, Intents } from "discord.js";
-import { ContentMongoDB, date } from "./UpdateLog";
+import { ContentMongoDB, TodayDate } from "./UpdateLog";
 // const schedule = require("node-schedule");
 
 const client = new Client({
@@ -15,7 +15,7 @@ client.on("ready", async (msg: any) => {
     const Data = new ContentMongoDB();
     const a: any = await new Promise((resolve) => {
       Data.getRawData(
-        `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+        `${TodayDate.getFullYear()}-${TodayDate.getMonth() + 1}-${TodayDate.getDate()}`
       ).then((data: any) => {
         resolve(data);
       });

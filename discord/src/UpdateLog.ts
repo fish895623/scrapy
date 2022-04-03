@@ -23,10 +23,10 @@ class ContentMongoDB {
    *   });
    *   logger.info("Get Data");
    * });
-   * @param date Set date to search
+   * @param _date Set date to search
    * @returns name, address, title, content, date
    */
-  getRawData(date: string) { // TODO Change types
+  getRawData(_date: string) { // TODO Change types
     return new Promise((resolve, reject) => {
       mongoose.connect(
         url,
@@ -35,7 +35,7 @@ class ContentMongoDB {
           if (err) {
             reject(err);
           }
-          resolve(await this.modelPerson.find({ date: date }));
+          resolve(await this.modelPerson.find({ date: _date }));
           await mongoose.connection.close();
         }
       );
@@ -43,6 +43,6 @@ class ContentMongoDB {
   }
 }
 
-const date = new Date();
+const TodayDate = new Date();
 
-export { ContentMongoDB, date };
+export { ContentMongoDB, TodayDate };
